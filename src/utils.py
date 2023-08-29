@@ -1,10 +1,20 @@
-import os, sys
+import os
+import sys
 import numpy as np
 import pandas as pd
 from src.exception import CustomException
 from sklearn.metrics import r2_score
 from sklearn.model_selection import GridSearchCV
 import dill
+
+def load_object(file_path):
+    try: 
+        with open(file_path, 'rb') as f:
+            return dill.load(f)
+    except Exception as e:
+        raise CustomException(e, sys)
+
+
 def save_object(file_path, obj):
     try:
         dir_path = os.path.dirname(file_path)
